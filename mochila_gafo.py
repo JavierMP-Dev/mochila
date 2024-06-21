@@ -1,7 +1,7 @@
-import networkx as nx
-import matplotlib.pyplot as plt
+import networkx as nx  #libreria para analizar grafos, sirve para implementar bfs o dfs
+import matplotlib.pyplot as plt  #crea visualizaciones estaticas de los grafos
 
-def knapsack_backtracking(values, weights, max_weight):
+def mochila_backtracking(values, weights, max_weight):
     # Número de elementos
     n = len(values)
     
@@ -13,7 +13,7 @@ def knapsack_backtracking(values, weights, max_weight):
         if parent:
             G.add_edge(parent, node)
         
-        # Caso base: si hemos considerado todos los elementos
+        # si hemos considerado todos los elementos se retorna el valor y los elementos tomados
         if index == n:
             return current_value, taken_items
         
@@ -28,7 +28,7 @@ def knapsack_backtracking(values, weights, max_weight):
                 max_value = value_with_item
                 best_items = items_with_item
         
-        return max_value, best_items
+        return max_value, best_items #retorna el valor maximo y los puestos ideales
     
     # Crear grafo vacío
     G = nx.DiGraph()
@@ -44,7 +44,7 @@ values = [60, 100, 120, 80]
 weights = [10, 20, 30, 15]
 max_weight = 50
 
-max_value, best_items, G = knapsack_backtracking(values, weights, max_weight)
+max_value, best_items, G = mochila_backtracking(values, weights, max_weight)
 print("El valor máximo que se puede obtener es:", max_value)
 print("Los elementos a tomar son:", best_items)
 
@@ -52,6 +52,7 @@ print("Los elementos a tomar son:", best_items)
 pos = nx.spring_layout(G)
 labels = {(i, w, v): f"{i},{w},{v}" for i, w, v in G.nodes()}
 
+#funcion para colorear los nodos
 nx.draw(G, pos, with_labels=True, labels=labels, node_size=700, node_color="skyblue", font_size=8, font_weight="bold", arrows=True)
 
 # funcion para Resaltar la solución óptima
@@ -64,7 +65,7 @@ for i in best_items:
     path.append((i + 1, current_weight, current_value))
 
 path_edges = [(path[i], path[i+1]) for i in range(len(path) - 1)]
-nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color="yellow", width=2)
+nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color="pink", width=2)
 
 plt.title("Grafo de decisiones del problema de la mochila")
 plt.show()
