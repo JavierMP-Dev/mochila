@@ -4,7 +4,8 @@ import pandas as pd
 resultados = [
     {"Nombre": "Juan", "Edad": 25, "Calificación": 85},
     {"Nombre": "Ana", "Edad": 22, "Calificación": 90},
-    {"Nombre": "Luis", "Edad": 24, "Calificación": 88}
+    {"Nombre": "Luis", "Edad": 24, "Calificación": 88},
+    {"Nombre": "Fransisco", "Edad": 35, "Calificación": 88}
 ]
 
 # Convertir los resultados a un DataFrame
