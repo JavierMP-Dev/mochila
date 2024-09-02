@@ -1,4 +1,8 @@
 import random
+<<<<<<< HEAD
+=======
+import pandas as pd
+>>>>>>> master
 
 def simulate_dice_rolls(num_faces, num_rolls=100000, seed_interval=10000):
     results = [0] * num_faces
@@ -12,6 +16,18 @@ def simulate_dice_rolls(num_faces, num_rolls=100000, seed_interval=10000):
         
     return results
 
+<<<<<<< HEAD
+=======
+def save_results_to_excel(results, num_faces, filename="resultados_dado.xlsx"):
+    # Crear un DataFrame de pandas con los resultados
+    data = {"Cara": list(range(1, num_faces + 1)), "Frecuencia": results}
+    df = pd.DataFrame(data)
+    
+    # Guardar el DataFrame en un archivo Excel
+    df.to_excel(filename, index=False)
+    print(f"Resultados guardados en {filename}")
+
+>>>>>>> master
 def main():
     try:
         num_faces = int(input("Introduce el número de caras del dado: "))
@@ -25,6 +41,12 @@ def main():
         print(f"\nResultados después de 100,000 tiradas de un dado de {num_faces} caras:")
         for i, count in enumerate(results, start=1):
             print(f"Cara {i}: {count} veces")
+<<<<<<< HEAD
+=======
+        
+        # Guardar los resultados en un archivo Excel
+        save_results_to_excel(results, num_faces)
+>>>>>>> master
     
     except ValueError:
         print("Por favor, introduce un número entero válido.")

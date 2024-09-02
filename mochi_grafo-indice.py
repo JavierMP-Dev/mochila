@@ -1,47 +1,3 @@
-<<<<<<< HEAD
-import time
-
-def knapsack(values, weights, max_weight):
-    n = len(values)
-    # Crear una tabla para almacenar los valores máximos para cada subproblema
-    dp = [[0 for _ in range(max_weight + 1)] for _ in range(n + 1)]
-    
-    # Llenar la tabla de manera bottom-up
-    for i in range(1, n + 1):
-        for w in range(max_weight + 1):
-            if weights[i - 1] <= w:
-                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1])
-            else:
-                dp[i][w] = dp[i - 1][w]
-    
-    # Imprimir la tabla
-    for row in dp:
-        print(row)
-    
-    # Encontrar los elementos que se tomaron para obtener el resultado óptimo
-    taken_items = []
-    w = max_weight
-    for i in range(n, 0, -1):
-        if dp[i][w] != dp[i - 1][w]:
-            taken_items.append(i - 1)
-            w -= weights[i - 1]
-    
-    # El valor máximo está en dp[n][max_weight]
-    return dp[n][max_weight], taken_items
-
-# Ejemplo de uso
-values = [60, 100, 120]
-weights = [10, 20, 30]
-max_weight = 50
-
-start_time = time.time()
-max_value, taken_items = knapsack(values, weights, max_weight)
-end_time = time.time()
-
-print("El valor máximo que se puede obtener es:", max_value)
-print("Los índices de los elementos a tomar son:", taken_items)
-print("Tiempo de ejecución:", end_time - start_time, "segundos")
-=======
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -52,7 +8,7 @@ def knapsack_backtracking(values, weights, max_weight):
     # Función auxiliar de DFS y backtracking
     def dfs(index, current_weight, current_value, taken_items, G, parent=None):
         # Añadir nodo al grafo
-        node = (index, current_weight, current_value)
+        node = (index, current_weight)
         G.add_node(node)
         if parent:
             G.add_edge(parent, node)
@@ -94,22 +50,19 @@ print("Los elementos a tomar son:", best_items)
 
 # Dibujar el grafo
 pos = nx.spring_layout(G)
-labels = {(i, w, v): f"{i},{w},{v}" for i, w, v in G.nodes()}
+labels = {(i, w): f"{i},{w}" for i, w in G.nodes()}
 
 nx.draw(G, pos, with_labels=True, labels=labels, node_size=700, node_color="skyblue", font_size=8, font_weight="bold", arrows=True)
 
-# funcion para Resaltar la solución óptima
-path = [(0, 0, 0)]
+# Resaltar la solución óptima
+path = [(0, 0)]
 current_weight = 0
-current_value = 0
 for i in best_items:
     current_weight += weights[i]
-    current_value += values[i]
-    path.append((i + 1, current_weight, current_value))
+    path.append((i + 1, current_weight))
 
 path_edges = [(path[i], path[i+1]) for i in range(len(path) - 1)]
-nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color="yellow", width=2)
+nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color="red", width=2)
 
 plt.title("Grafo de decisiones del problema de la mochila")
 plt.show()
->>>>>>> master
