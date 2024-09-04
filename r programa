@@ -1,0 +1,21 @@
+install.packages("readxl")
+install.packages("ggplot2")
+
+
+# Cargar las bibliotecas
+library(readxl)
+library(ggplot2)
+
+# Cargar los datos desde el archivo Excel
+data <- read_excel("resultados_dado.xlsx")
+
+# Mostrar los datos cargados (opcional)
+print(data)
+
+# Crear el gráfico de barras
+ggplot(data, aes(x = factor(Cara), y = Frecuencia)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Resultados de Tiradas de un Dado",
+       x = "Cara del Dado",
+       y = "Frecuencia") +
+  theme_minimal()
