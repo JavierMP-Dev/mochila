@@ -1,17 +1,12 @@
 import random
-
 def tiradas(num_faces, num_veces=100000, seed_interval=10000):
     results = [0] * num_faces
-    
     for i in range(num_veces):
         if i % seed_interval == 0:
             random.seed()  # aqui se Cambia la semilla del generador de números aleatorios
-            
         roll = random.randint(1, num_faces)
         results[roll - 1] += 1
-        
     return results
-
 def main():
     try:
         num_faces = int(input("Introduce el número de caras del dado: "))
@@ -31,3 +26,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#este programa funciona y arroja los numeros a un excel
