@@ -32,3 +32,7 @@ max_weight = 50
 max_value, selected_items = knapsack_dynamic(values, weights, max_weight)
 print("El valor máximo que se puede obtener es:", max_value)
 print("Los elementos a tomar son:", selected_items)
+
+
+#añadiendo comentarios
+# Primero, creamos una función llamada knapsack_dynamic que toma como pará
